@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,9 +11,11 @@ const Navigation = () => {
   return (
     <List>
       {categories.map(({ name }, index) => (
-        <ListItem data-testid="category-button" button key={name}>
-          <ListItemText primary={name} />
-        </ListItem>
+        <NavLink activeClassName="selected" data-testid="category-button" to={`/category/${name}`} key={name}>
+          <ListItem button>
+            <ListItemText primary={name} />
+          </ListItem>
+        </NavLink>
       ))}
     </List>
   );

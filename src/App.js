@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Navigation from './components/Navigation/';
 
 const Home = lazy(() => import('./pages/Home/'));
+const Category = lazy(() => import('./pages/Category/'));
 
 const drawerWidth = 240;
 
@@ -40,34 +41,35 @@ export default function App() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography noWrap>Meals</Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <Toolbar />
-          <div className={classes.drawerContainer}>
-            <Navigation />
-          </div>
-        </Drawer>
-        <main className={classes.content}>
-          <Toolbar />
-          <Router>
+      <Router>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <Typography noWrap>Meals</Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            <Toolbar />
+            <div className={classes.drawerContainer}>
+              <Navigation />
+            </div>
+          </Drawer>
+          <main className={classes.content}>
+            <Toolbar />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/category/:category" component={Category} />
             </Switch>
-          </Router>
-        </main>
-      </div>
+          </main>
+        </div>
+      </Router>
     </Suspense>
   );
 }

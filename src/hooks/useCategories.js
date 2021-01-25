@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { get } from '../utils/apiCaller';
+import { sortByObjectProperty } from '../utils/sorter';
 
 const getCategories = async () => {
   const response = await get('https://www.themealdb.com/api/json/v1/1/categories.php');
@@ -11,7 +12,7 @@ const getCategories = async () => {
       thumbnail: strCategoryThumb,
       description: strCategoryDescription,
     }))
-    .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+    .sort(sortByObjectProperty('name'));
 };
 
 const UseCategories = () => {

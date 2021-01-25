@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+
 import Navigation from '.';
 
 import * as apiCaller from '../../utils/apiCaller';
@@ -23,10 +25,21 @@ const mockCategories = {
 };
 
 describe('Navigation', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('renders properly', async () => {
     apiCaller.get = jest.fn().mockResolvedValue({ json: () => mockCategories });
-    const { findAllByTestId } = render(<Navigation />);
+    const { findAllByTestId, getByText } = render(
+      <MemoryRouter>
+        <Navigation />
+      </MemoryRouter>
+    );
     const categories = await findAllByTestId('category-button');
-    expect(categories.length).toBe(2);
+
+    expect(categories.length).toBe(mockCategories.categories.length);
+    expect(getByText(mockCategories.categories[0].strCategory)).toBeInTheDocument();
+    expect(getByText(mockCategories.categories[1].strCategory)).toBeInTheDocument();
   });
 });
