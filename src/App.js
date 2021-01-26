@@ -8,8 +8,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Navigation from './components/Navigation/';
 
-const Home = lazy(() => import('./pages/Home/'));
-const Category = lazy(() => import('./pages/Category/'));
+const Home = lazy(() => import('./routes/Home/'));
+const Category = lazy(() => import('./routes/Category/'));
 
 const drawerWidth = 240;
 
