@@ -15,7 +15,7 @@ const getCategories = async () => {
     .sort(sortByObjectProperty('name'));
 };
 
-const UseCategories = () => {
+const useCategories = () => {
   const [categories, setCategories] = useState([]);
 
   const refreshCategories = async () => {
@@ -30,4 +30,4 @@ const UseCategories = () => {
   return categories;
 };
 
-export default UseCategories;
+export default useCategories;

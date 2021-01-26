@@ -14,7 +14,7 @@ const getMealsFromCategory = async (category) => {
     .sort(sortByObjectProperty('name'));
 };
 
-const UseMealsFromCategory = (mealCategory) => {
+const useMealsFromCategory = (mealCategory) => {
   const [meals, setCategories] = useState([]);
 
   const refreshMeals = async (category) => {
@@ -29,4 +29,4 @@ const UseMealsFromCategory = (mealCategory) => {
   return meals;
 };
 
-export default UseMealsFromCategory;
+export default useMealsFromCategory;
