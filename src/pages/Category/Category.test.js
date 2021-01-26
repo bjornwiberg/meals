@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import Category from '.';
@@ -37,5 +37,28 @@ describe('Category', () => {
     expect(meals.length).toBe(mockMeals.meals.length);
     expect(getByText(mockMeals.meals[0].strMeal)).toBeInTheDocument();
     expect(getByText(mockMeals.meals[1].strMeal)).toBeInTheDocument();
+  });
+
+  test('should filter result properly', async () => {
+    apiCaller.get = jest.fn().mockResolvedValue({ json: () => mockMeals });
+    const { findByText, getByTestId, getByText } = render(
+      <MemoryRouter initialEntries={['/category/Test']}>
+        <Category />
+      </MemoryRouter>
+    );
+    const firstMeal = mockMeals.meals[0].strMeal;
+    await findByText(firstMeal);
+    const search = getByTestId('search-category');
+    const getFirstMeal = getByText(firstMeal);
+
+    expect(getFirstMeal).toBeInTheDocument();
+
+    // Make a search
+    fireEvent.change(search, { target: { value: 'Cajun' } });
+    await waitForElementToBeRemoved(getFirstMeal);
+
+    // Remove the search
+    fireEvent.change(search, { target: { value: '' } });
+    expect(await findByText(firstMeal)).toBeInTheDocument();
   });
 });
