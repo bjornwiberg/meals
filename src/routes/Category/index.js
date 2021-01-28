@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Search from '../../components/Search/';
 import useDebounce from '../../hooks/useDebounce';
@@ -21,10 +22,12 @@ const Category = () => {
       <Search currentValue={filter} onChange={handleSearch} testSuffix="category" />
       {filteredMeals.map(({ id, name, thumbnail }) => (
         <div className="meals--meal" data-testid="meal" key={name}>
-          <div>{name}</div>
-          <div className="meal--thumbnail">
-            <img src={thumbnail} alt={name} />
-          </div>
+          <NavLink to={`/meal/${id}`} data-testid="meal-link">
+            <div>{name}</div>
+            <div className="meal--thumbnail">
+              <img alt={name} src={thumbnail} data-testid="meal-thumbnail" />
+            </div>
+          </NavLink>
         </div>
       ))}
     </div>

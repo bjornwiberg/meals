@@ -10,6 +10,7 @@ import Navigation from './components/Navigation/';
 
 const Home = lazy(() => import('./routes/Home/'));
 const Category = lazy(() => import('./routes/Category/'));
+const Meal = lazy(() => import('./routes/Meal/'));
 
 const drawerWidth = 240;
 
@@ -66,6 +67,7 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/category/:category" component={Category} />
+              <Route exact path="/meal/:mealId" component={Meal} />
             </Switch>
           </main>
         </div>
