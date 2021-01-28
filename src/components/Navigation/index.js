@@ -10,7 +10,7 @@ const Navigation = () => {
 
   return (
     <List>
-      {categories.map(({ name }, index) => (
+      {categories.map(({ name }) => (
         <NavLink activeClassName="selected" data-testid="category-button" to={`/category/${name}`} key={name}>
           <ListItem button>
             <ListItemText primary={name} />
