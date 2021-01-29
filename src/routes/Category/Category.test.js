@@ -32,17 +32,11 @@ describe('Category', () => {
         <Category />
       </MemoryRouter>
     );
-    const meals = await findAllByTestId('meal');
+    const meals = await findAllByTestId('meal-card');
 
     expect(meals.length).toBe(mockMeals.meals.length);
     expect(getByText(mockMeals.meals[0].strMeal)).toBeInTheDocument();
-    expect(within(meals[0]).getByTestId('meal-link').getAttribute('href')).toBe(`/meal/${mockMeals.meals[0].idMeal}`);
-    expect(within(meals[0]).getByTestId('meal-thumbnail').getAttribute('src')).toBe(mockMeals.meals[0].strMealThumb);
-    expect(within(meals[0]).getByTestId('meal-thumbnail').getAttribute('alt')).toBe(mockMeals.meals[0].strMeal);
     expect(getByText(mockMeals.meals[1].strMeal)).toBeInTheDocument();
-    expect(within(meals[1]).getByTestId('meal-link').getAttribute('href')).toBe(`/meal/${mockMeals.meals[1].idMeal}`);
-    expect(within(meals[1]).getByTestId('meal-thumbnail').getAttribute('src')).toBe(mockMeals.meals[1].strMealThumb);
-    expect(within(meals[1]).getByTestId('meal-thumbnail').getAttribute('alt')).toBe(mockMeals.meals[1].strMeal);
   });
 
   test('should filter result properly', async () => {
