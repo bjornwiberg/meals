@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import RandomMeal from '.';
@@ -29,20 +29,20 @@ describe('Category', () => {
         meals: [mockRandomMeals[0]],
       }),
     });
-    const { findByTestId, getByTestId, getByText } = render(
+    render(
       <MemoryRouter>
         <RandomMeal />
       </MemoryRouter>
     );
-    await findByTestId('random-meal');
-    const link = getByTestId('random-meal-link');
-    const image = getByTestId('random-meal-image');
+    await screen.findByTestId('random-meal');
+    const link = screen.getByTestId('random-meal-link');
+    const image = screen.getByTestId('random-meal-image');
 
-    expect(getByText(mockRandomMeals[0].strMeal)).toBeInTheDocument();
+    expect(screen.getByText(mockRandomMeals[0].strMeal)).toBeInTheDocument();
     expect(link.getAttribute('href')).toBe(`/meal/${mockRandomMeals[0].idMeal}`);
     expect(image.getAttribute('src')).toBe(mockRandomMeals[0].strMealThumb);
     expect(image.getAttribute('alt')).toBe(mockRandomMeals[0].strMeal);
-    expect(getByText('refresh')).toBeInTheDocument();
+    expect(screen.getByText('refresh')).toBeInTheDocument();
   });
 
   test('should fetch a new random meal when clicking on refresh', async () => {
@@ -58,18 +58,18 @@ describe('Category', () => {
           meals: [mockRandomMeals[1]],
         }),
       });
-    const { findByTestId, getByTestId, getByText } = render(
+    render(
       <MemoryRouter>
         <RandomMeal />
       </MemoryRouter>
     );
-    await findByTestId('random-meal');
-    const link = getByTestId('random-meal-link');
-    const image = getByTestId('random-meal-image');
-    const refresh = getByTestId('random-meal-refresh');
+    await screen.findByTestId('random-meal');
+    const link = screen.getByTestId('random-meal-link');
+    const image = screen.getByTestId('random-meal-image');
+    const refresh = screen.getByTestId('random-meal-refresh');
 
     // first fetch of random image
-    expect(getByText(mockRandomMeals[0].strMeal)).toBeInTheDocument();
+    expect(screen.getByText(mockRandomMeals[0].strMeal)).toBeInTheDocument();
     expect(link.getAttribute('href')).toBe(`/meal/${mockRandomMeals[0].idMeal}`);
     expect(image.getAttribute('src')).toBe(mockRandomMeals[0].strMealThumb);
     expect(image.getAttribute('alt')).toBe(mockRandomMeals[0].strMeal);
@@ -80,7 +80,7 @@ describe('Category', () => {
     await waitFor(() => expect(apiCaller.get).toHaveBeenCalledTimes(2));
 
     // second fetch of random image
-    expect(getByText(mockRandomMeals[1].strMeal)).toBeInTheDocument();
+    expect(screen.getByText(mockRandomMeals[1].strMeal)).toBeInTheDocument();
     expect(link.getAttribute('href')).toBe(`/meal/${mockRandomMeals[1].idMeal}`);
     expect(image.getAttribute('src')).toBe(mockRandomMeals[1].strMealThumb);
     expect(image.getAttribute('alt')).toBe(mockRandomMeals[1].strMeal);

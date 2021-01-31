@@ -1,4 +1,4 @@
-import { fireEvent, render, waitForElementToBeRemoved, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import Category from '.';
@@ -27,29 +27,29 @@ describe('Category', () => {
 
   test('renders properly', async () => {
     apiCaller.get = jest.fn().mockResolvedValue({ json: () => mockMeals });
-    const { findAllByTestId, getByText } = render(
+    render(
       <MemoryRouter initialEntries={['/category/Test']}>
         <Category />
       </MemoryRouter>
     );
-    const meals = await findAllByTestId('meal-card');
+    const meals = await screen.findAllByTestId('meal-card');
 
     expect(meals.length).toBe(mockMeals.meals.length);
-    expect(getByText(mockMeals.meals[0].strMeal)).toBeInTheDocument();
-    expect(getByText(mockMeals.meals[1].strMeal)).toBeInTheDocument();
+    expect(screen.getByText(mockMeals.meals[0].strMeal)).toBeInTheDocument();
+    expect(screen.getByText(mockMeals.meals[1].strMeal)).toBeInTheDocument();
   });
 
   test('should filter result properly', async () => {
     apiCaller.get = jest.fn().mockResolvedValue({ json: () => mockMeals });
-    const { findByText, getByTestId, getByText } = render(
+    render(
       <MemoryRouter initialEntries={['/category/Test']}>
         <Category />
       </MemoryRouter>
     );
     const firstMeal = mockMeals.meals[0].strMeal;
-    await findByText(firstMeal);
-    const search = getByTestId('search-category');
-    const getFirstMeal = getByText(firstMeal);
+    await screen.findByText(firstMeal);
+    const search = screen.getByTestId('search-category');
+    const getFirstMeal = screen.getByText(firstMeal);
 
     expect(getFirstMeal).toBeInTheDocument();
 
@@ -59,6 +59,6 @@ describe('Category', () => {
 
     // Remove the search
     fireEvent.change(search, { target: { value: '' } });
-    expect(await findByText(firstMeal)).toBeInTheDocument();
+    expect(await screen.findByText(firstMeal)).toBeInTheDocument();
   });
 });

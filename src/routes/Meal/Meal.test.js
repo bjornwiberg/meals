@@ -1,4 +1,4 @@
-import { getDefaultNormalizer, fireEvent, render, waitFor } from '@testing-library/react';
+import { getDefaultNormalizer, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import Meal from '.';
@@ -73,15 +73,15 @@ describe('Meal', () => {
         meals: [mockRandomMeals[0]],
       }),
     });
-    const { findByTestId, getByTestId, getAllByText } = render(
+    render(
       <MemoryRouter initialEntries={['/meal/52772']}>
         <Meal />
       </MemoryRouter>
     );
-    await findByTestId('meal');
-    const image = getByTestId('meal-image');
-    const source = getByTestId('meal-source');
-    const youtube = getByTestId('meal-youtube');
+    await screen.findByTestId('meal');
+    const image = screen.getByTestId('meal-image');
+    const source = screen.getByTestId('meal-source');
+    const youtube = screen.getByTestId('meal-youtube');
 
     // check special elemets
     expect(image.getAttribute('src')).toBe(mockRandomMeals[0].strMealThumb);
@@ -98,7 +98,7 @@ describe('Meal', () => {
       .filter(([key, value]) => !!value && key !== 'idMeal' && key !== 'strYoutube' && key !== 'strMealThumb')
       .forEach(([_, value]) => {
         expect(
-          getAllByText(value, {
+          screen.getAllByText(value, {
             normalizer: getDefaultNormalizer({ collapseWhitespace: false, trim: false }),
           }).length > 0
         ).toBeTruthy();
