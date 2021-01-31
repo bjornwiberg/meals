@@ -12,7 +12,7 @@ const Home = () => {
         <RandomMeal />
       </React.Suspense>
       <div className="home--description">
-        Hi and welcome to this meal app, here you can browse for meals by catogory, get a random meal or search for a
+        Hi and welcome to this meal app, here you can browse for meals by category, get a random meal or search for a
         meal below.
       </div>
       <SearchMeals />
