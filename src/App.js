@@ -1,18 +1,21 @@
 import React, { lazy, Suspense, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 import Loader from './components/Loader/';
 import Navigation from './components/Navigation/';
 import SiteName from './components/SiteName/';
+import useFavorites from './hooks/useFavorites';
 
 import './App.scss';
 
-const Home = lazy(() => import('./routes/Home/'));
 const Category = lazy(() => import('./routes/Category/'));
+const Favorites = lazy(() => import('./routes/Favorites/'));
+const Home = lazy(() => import('./routes/Home/'));
 const Meal = lazy(() => import('./routes/Meal/'));
 
 export default function App() {
   const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
+  const { favorites } = useFavorites();
 
   return (
     <Suspense fallback={<Loader />}>
@@ -22,7 +25,9 @@ export default function App() {
             <div className="wrapper">
               <SiteName text="Meal App" />
               <div className="navigation-wrapper">
-                <div className="favorites">♥ ({favorites.length})</div>
+                <div className="favorites" title="Go to favorites page">
+                  <Link to="/favorites">♥ ({favorites.length})</Link>
+                </div>
                 <div className="desktop-navigation">
                   <Navigation />
                 </div>
@@ -43,6 +48,7 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/category/:category" component={Category} />
+              <Route exact path="/favorites" component={Favorites} />
               <Route exact path="/meal/:mealId" component={Meal} />
             </Switch>
           </main>

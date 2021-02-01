@@ -3,6 +3,7 @@
 
   background-color: var(--dark-green);
   box-shadow: 0 0 var(--box-shadow) #222;
+  position: relative;
   transition: 0.3s;
 
   @media screen and (min-width: 1001px) {
@@ -14,6 +15,15 @@
   a {
     display: block;
     text-decoration: none;
+  }
+
+  &--favorite {
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 30px;
+    color: #fff;
   }
 
   &--thumbnail {
