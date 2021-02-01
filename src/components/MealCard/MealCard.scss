@@ -1,7 +1,8 @@
 .meal-card {
   --box-shadow: 1px;
 
-  box-shadow: 0 0 var(--box-shadow) #777;
+  background-color: var(--dark-green);
+  box-shadow: 0 0 var(--box-shadow) #222;
   transition: 0.3s;
 
   @media screen and (min-width: 1001px) {
@@ -40,7 +41,7 @@
   }
 
   &--name {
-    color: #333;
+    color: #fff;
     font-size: clamp(10px, 4vw, 14px);
     height: 80px;
     padding: 8px 16px;

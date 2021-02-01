@@ -64,36 +64,46 @@ const Meal = () => {
       {instructions && (
         <div className="meal--instructions">
           <h2>Instructions</h2>
-          {instructions}
+          <div className="box-shadow">
+            <div className="meal--instructions-content">{instructions}</div>
+          </div>
         </div>
       )}
       <div className="meal--info">
         <h2>Information</h2>
         <div className="meal--info-grid">
           {area && (
-            <div className="meal--data meal--area">
-              <div className="meal--data-title">Area</div> <div className="meal--data-value">{area}</div>
+            <div className="box-shadow">
+              <div className="meal--data meal--area">
+                <div className="meal--data-title">Area</div> <div className="meal--data-value">{area}</div>
+              </div>
             </div>
           )}
           {drinkAlternative && (
-            <div className="meal--data meal--drink-alternative">
-              <div className="meal--data-title">Drink alternative</div>
-              <div className="meal--data-value">{drinkAlternative}</div>
+            <div className="box-shadow">
+              <div className="meal--data meal--drink-alternative">
+                <div className="meal--data-title">Drink alternative</div>
+                <div className="meal--data-value">{drinkAlternative}</div>
+              </div>
             </div>
           )}
           {category && (
-            <div className="meal--data meal--category ">
-              <div className="meal--data-title">Category</div>
-              <div className="meal--data-value">{category}</div>
+            <div className="box-shadow">
+              <div className="meal--data meal--category ">
+                <div className="meal--data-title">Category</div>
+                <div className="meal--data-value">{category}</div>
+              </div>
             </div>
           )}
           {tags && (
-            <div className="meal--data meal--tags ">
-              <div className="meal--data-title">Tags</div>
-              <div className="meal--data-value">
-                {tags.split(',').map((tag) => (
-                  <div className="meal--tag">{tag}</div>
-                ))}
+            <div className="box-shadow">
+              <div className="meal--data meal--tags ">
+                <div className="meal--data-title">Tags</div>
+                <div className="meal--data-value">
+                  {tags.split(',').map((tag) => (
+                    <div className="meal--tag">{tag}</div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -102,12 +112,14 @@ const Meal = () => {
       {ingridients && (
         <div className="meal--ingridients">
           <h2>Ingridients</h2>
-          {ingridients.map(({ ingridientName, measure }) => (
-            <div className="meal--ingridient" key={`${ingridientName}${measure}`}>
-              <div className="meal--ingridient-name">{ingridientName}</div>
-              <div className="meal--ingridient-measure">{measure}</div>
-            </div>
-          ))}
+          <div className="box-shadow">
+            {ingridients.map(({ ingridientName, measure }) => (
+              <div className="meal--ingridient" key={`${ingridientName}${measure}`}>
+                <div className="meal--ingridient-name">{ingridientName}</div>
+                <div className="meal--ingridient-measure">{measure}</div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
       {youtube && (

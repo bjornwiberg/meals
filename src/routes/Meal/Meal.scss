@@ -1,6 +1,6 @@
 .meal {
   &--data {
-    border: 1px solid #eee;
+    background-color: #fff;
     border-radius: 3px;
     height: 100px;
     display: flex;
@@ -23,9 +23,10 @@
   }
 
   &--ingridient {
+    background-color: #efefef;
     padding: 8px;
     &:nth-child(odd) {
-      background-color: #eee;
+      background-color: #fff;
     }
 
     display: flex;
@@ -37,6 +38,13 @@
 
     &-measure {
       font-style: italic;
+    }
+  }
+
+  &--instructions {
+    &-content {
+      padding: 8px;
+      background-color: #fff;
     }
   }
 

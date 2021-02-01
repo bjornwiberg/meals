@@ -11,10 +11,10 @@ const Home = () => {
       <React.Suspense fallback={<div>Loading random meal...</div>}>
         <RandomMeal />
       </React.Suspense>
-      <div className="home--description">
+      <h1>
         Hi and welcome to this meal app, here you can browse for meals by category, get a random meal or search for a
         meal below.
-      </div>
+      </h1>
       <SearchMeals />
     </div>
   );

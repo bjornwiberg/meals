@@ -4,6 +4,8 @@ import useDebounce from '../../hooks/useDebounce';
 import useMealsFromSearchString from '../../hooks/useMealsFromSearchString';
 import Search from '../../components/Search';
 
+import './SearchMeals.scss';
+
 const SearchMeals = () => {
   const [searchString, setSearchString] = React.useState('');
   const debouncedSearchString = useDebounce(searchString, 300);
