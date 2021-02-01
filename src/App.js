@@ -1,5 +1,7 @@
 import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Loader from './components/Loader/';
 import Navigation from './components/Navigation/';
 import SiteName from './components/SiteName/';
 
@@ -13,7 +15,7 @@ export default function App() {
   const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <Router>
         <div className="meal-app">
           <div className="app-bar">
