@@ -1,0 +1,48 @@
+.meal-card {
+  --box-shadow: 1px;
+
+  box-shadow: 0 0 var(--box-shadow) #777;
+  transition: 0.3s;
+
+  @media screen and (min-width: 1001px) {
+    &:hover {
+      --box-shadow: 15px;
+    }
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+  }
+
+  &--thumbnail {
+    padding-bottom: 66.7%;
+    position: relative;
+    overflow: hidden;
+
+    &-wrapper {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    img {
+      left: 50%;
+      min-height: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1.01);
+      transition: 0.3s;
+      width: 100%;
+    }
+  }
+
+  &--name {
+    color: #333;
+    font-size: clamp(10px, 4vw, 14px);
+    height: 70px;
+    padding: 8px 16px;
+  }
+}
