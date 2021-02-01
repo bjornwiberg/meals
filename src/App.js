@@ -46,6 +46,7 @@ export default function App() {
           <nav className={`mobile-navigation ${mobileNavigationOpen ? 'open' : ''}`}>
             <Navigation onClick={setMobileNavigationOpen} />
           </nav>
+          <footer>By Björn Wiberg for Mashie</footer>
         </div>
       </Router>
     </Suspense>
