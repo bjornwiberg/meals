@@ -36,7 +36,7 @@ describe('Navigation', () => {
         <Navigation />
       </MemoryRouter>
     );
-    const categories = await screen.findAllByTestId('category-button');
+    const categories = await screen.findAllByTestId('category-link');
 
     expect(categories.length).toBe(mockCategories.categories.length);
     expect(screen.getByText(mockCategories.categories[0].strCategory)).toBeInTheDocument();

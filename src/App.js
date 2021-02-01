@@ -1,75 +1,51 @@
-import React, { Suspense, lazy } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Navigation from './components/Navigation/';
+import SiteName from './components/SiteName/';
+
+import './App.scss';
 
 const Home = lazy(() => import('./routes/Home/'));
 const Category = lazy(() => import('./routes/Category/'));
 const Meal = lazy(() => import('./routes/Meal/'));
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerContainer: {
-    overflow: 'auto',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-}));
-
 export default function App() {
-  const classes = useStyles();
+  const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Router>
-        <div className={classes.root}>
-          <CssBaseline />
-          <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
-              <Typography noWrap>Meals</Typography>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            className={classes.drawer}
-            variant="permanent"
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            <Toolbar />
-            <div className={classes.drawerContainer}>
-              <Navigation />
+        <div className="meal-app">
+          <div className="app-bar">
+            <div className="wrapper">
+              <SiteName text="Meal App" />
+              <div className="navigation-wrapper">
+                <div className="desktop-navigation">
+                  <Navigation />
+                </div>
+                <div className="mobile-app-bar-buttons">
+                  <nav
+                    class={`mobile-navigation-toggler ${mobileNavigationOpen ? 'active' : ''}`}
+                    onClick={() => setMobileNavigationOpen((p) => !p)}
+                  >
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                  </nav>
+                </div>
+              </div>
             </div>
-          </Drawer>
-          <main className={classes.content}>
-            <Toolbar />
+          </div>
+          <main className="wrapper">
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/category/:category" component={Category} />
               <Route exact path="/meal/:mealId" component={Meal} />
             </Switch>
           </main>
+          <nav className={`mobile-navigation ${mobileNavigationOpen ? 'open' : ''}`}>
+            <Navigation onClick={setMobileNavigationOpen} />
+          </nav>
         </div>
       </Router>
     </Suspense>

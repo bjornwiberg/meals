@@ -1,23 +1,27 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import useCategories from '../../hooks/useCategories';
 
-const Navigation = () => {
+const Navigation = ({ onClick = () => {} }) => {
   const categories = useCategories();
 
   return (
-    <List>
-      {categories.map(({ name }) => (
-        <NavLink activeClassName="selected" data-testid="category-button" to={`/category/${name}`} key={name}>
-          <ListItem button>
-            <ListItemText primary={name} />
-          </ListItem>
-        </NavLink>
-      ))}
-    </List>
+    <ul className="navigation">
+      <li className="navigation--item navigation--item__top-level">
+        <span className="title">By category</span>
+        <div className="navigation--submenu">
+          <ul>
+            {categories.map(({ name }) => (
+              <li className="navigation--item" key={name} onClick={() => onClick(false)}>
+                <NavLink activeClassName="selected" data-testid="category-link" to={`/category/${name}`}>
+                  {name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    </ul>
   );
 };
 
