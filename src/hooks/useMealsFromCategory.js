@@ -15,11 +15,11 @@ const getMealsFromCategory = async (category) => {
 };
 
 const useMealsFromCategory = (mealCategory) => {
-  const [meals, setCategories] = useState([]);
+  const [meals, setMeals] = useState([]);
 
   const refreshMeals = async (category) => {
     const newMeals = await getMealsFromCategory(category);
-    setCategories(newMeals);
+    setMeals(newMeals);
   };
 
   useEffect(() => {
