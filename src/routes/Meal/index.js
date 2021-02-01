@@ -101,7 +101,9 @@ const Meal = () => {
                 <div className="meal--data-title">Tags</div>
                 <div className="meal--data-value">
                   {tags.split(',').map((tag) => (
-                    <div className="meal--tag">{tag}</div>
+                    <div className="meal--tag" key={tag}>
+                      {tag}
+                    </div>
                   ))}
                 </div>
               </div>
