@@ -28,17 +28,17 @@ const RandomMeal = () => {
   }, []);
 
   return (
-    <div className="random-meal" data-testid="random-meal">
+    <div className="random-meal full-width" data-testid="random-meal">
       <div className="meal">
         <div className="meal--image">
           <NavLink to={`/meal/${meal.id}`} data-testid="random-meal-link">
             <img data-testid="random-meal-image" src={meal.thumbnail} alt={meal.name} />
+            <div className="meal--name">{meal.name}</div>
           </NavLink>
+          <div className="random-meal--refresh" data-testid="random-meal-refresh" onClick={refreshRandomMeal}>
+            get a new random meal
+          </div>
         </div>
-        <div className="meal--name">{meal.name}</div>
-      </div>
-      <div className="random-meal--refresh" data-testid="random-meal-refresh" onClick={refreshRandomMeal}>
-        refresh
       </div>
     </div>
   );

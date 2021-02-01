@@ -1,10 +1,53 @@
 .random-meal {
-  &--refresh {
-    text-align: center;
-  }
-}
-.meal {
-  &--name {
-    font-weight: bold;
+  .meal {
+    position: relative;
+
+    &--name {
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      color: #fff;
+      text-shadow: 0 0 10px #333;
+      text-transform: uppercase;
+      font-size: clamp(20px, 5vw, 45px);
+    }
+
+    &--image {
+      --scale: 1;
+
+      filter: drop-shadow(0 2px 8px #000);
+      height: clamp(150px, 30vw, 400px);
+      overflow: hidden;
+
+      .random-meal--refresh {
+        background-color: #fff;
+        border-radius: 4px 0 0 0;
+        border: 1px solid #333;
+        bottom: -1px;
+        color: #333;
+        cursor: pointer;
+        font-size: clamp(10px, 4vw, 16px);
+        padding: 8px;
+        position: absolute;
+        right: -1px;
+      }
+
+      img {
+        height: 100%;
+        object-fit: cover;
+        transform: scale(var(--scale));
+        transition: 0.3s;
+        width: 100%;
+      }
+
+      @media screen and (min-width: 1001px) {
+        &:hover {
+          --scale: 1.01;
+        }
+      }
+    }
   }
 }
