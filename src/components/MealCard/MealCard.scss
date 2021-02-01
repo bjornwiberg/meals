@@ -33,7 +33,7 @@
       min-height: 100%;
       position: absolute;
       top: 50%;
-      transform: translate(-50%, -50%) scale(1.01);
+      transform: translate(-50%, -50%);
       transition: 0.3s;
       width: 100%;
     }
@@ -42,7 +42,7 @@
   &--name {
     color: #333;
     font-size: clamp(10px, 4vw, 14px);
-    height: 70px;
+    height: 80px;
     padding: 8px 16px;
   }
 }

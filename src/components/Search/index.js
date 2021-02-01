@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Search = ({ currentValue, onChange, testSuffix = '' }) => (
+import './Search.scss';
+
+const Search = ({ currentValue, onChange, placeHolder, testSuffix = '' }) => (
   <input
+    className="search-input"
     data-testid={`search${testSuffix !== '' ? `-${testSuffix}` : ''}`}
     onChange={onChange}
+    placeholder={placeHolder}
     value={currentValue}
-    placeholder="Type to filter result"
   />
 );
 
