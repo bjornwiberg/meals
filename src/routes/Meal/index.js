@@ -53,89 +53,86 @@ const Meal = () => {
     });
   }, [mealId]);
 
-  const {
-    name,
-    drinkAlternative,
-    category,
-    area,
-    instructions,
-    thumbnail,
-    tags,
-    youtube,
-    ingridients,
-    source,
-    modified,
-  } = meal;
+  const { name, drinkAlternative, category, area, instructions, thumbnail, tags, youtube, ingridients, source } = meal;
 
   return (
-    <div className="meal" data-testid="meal">
+    <div className="meal-page" data-testid="meal">
+      <h1 className="meal--name">{name}</h1>
       <div className="meal--image">
         <img alt={name} data-testid="meal-image" src={thumbnail} />
       </div>
-      <div className="meal--name">{name}</div>
-      {instructions && <div className="meal--instructions">{instructions}</div>}
-      {area && (
-        <div className="meal--area">
-          <div className="meal--data-title">Area:</div> <div className="meal--data-value">{area}</div>
+      {instructions && (
+        <div className="meal--instructions">
+          <h2>Instructions</h2>
+          {instructions}
         </div>
       )}
-      {drinkAlternative && (
-        <div className="meal--drink-alternative">
-          <div className="meal--data-title">Drink alternative:</div>
-          <div className="meal--data-value">{drinkAlternative}</div>
+      <div className="meal--info">
+        <h2>Information</h2>
+        <div className="meal--info-grid">
+          {area && (
+            <div className="meal--data meal--area">
+              <div className="meal--data-title">Area</div> <div className="meal--data-value">{area}</div>
+            </div>
+          )}
+          {drinkAlternative && (
+            <div className="meal--data meal--drink-alternative">
+              <div className="meal--data-title">Drink alternative</div>
+              <div className="meal--data-value">{drinkAlternative}</div>
+            </div>
+          )}
+          {category && (
+            <div className="meal--data meal--category ">
+              <div className="meal--data-title">Category</div>
+              <div className="meal--data-value">{category}</div>
+            </div>
+          )}
+          {tags && (
+            <div className="meal--data meal--tags ">
+              <div className="meal--data-title">Tags</div>
+              <div className="meal--data-value">
+                {tags.split(',').map((tag) => (
+                  <div className="meal--tag">{tag}</div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      )}
-      {category && (
-        <div className="meal--category ">
-          <div className="meal--data-title">Category:</div>
-          <div className="meal--data-value">{category}</div>
-        </div>
-      )}
-      {tags && (
-        <div className="meal--tags ">
-          <div className="meal--data-title">Tags:</div>
-          <div className="meal--data-value">{tags}</div>
-        </div>
-      )}
-      {youtube && (
-        <div className="meal--youtube ">
-          <iframe
-            allowFullScreen
-            data-testid="meal-youtube"
-            frameBorder="0"
-            height="315"
-            src={`https://www.youtube-nocookie.com/embed/${youtube.split('=')[1]}`}
-            title={`Video of ${name}}`}
-            width="560"
-          ></iframe>
-        </div>
-      )}
+      </div>
       {ingridients && (
         <div className="meal--ingridients">
-          Ingridients:
+          <h2>Ingridients</h2>
           {ingridients.map(({ ingridientName, measure }) => (
             <div className="meal--ingridient" key={`${ingridientName}${measure}`}>
               <div className="meal--ingridient-name">{ingridientName}</div>
-              <div className="meal--measure">{measure}</div>
+              <div className="meal--ingridient-measure">{measure}</div>
             </div>
           ))}
         </div>
       )}
-      {source && (
-        <div className="meal--source ">
-          <div className="meal--data-title">Source:</div>
-          <div className="meal--data-value">
-            <a data-testid="meal-source" href={source} rel="noopener noreferrer nofollow" target="_blank">
-              {source}
-            </a>
+      {youtube && (
+        <div className="meal--video ">
+          <h2>Video</h2>
+          <div className="meal--youtube ">
+            <iframe
+              allowFullScreen
+              data-testid="meal-youtube"
+              frameBorder="0"
+              height="100%"
+              src={`https://www.youtube-nocookie.com/embed/${youtube.split('=')[1]}`}
+              title={`Video of ${name}}`}
+              width="100%"
+            ></iframe>
           </div>
         </div>
       )}
-      {modified && (
-        <div className="meal--modified ">
-          <div className="meal--data-title">Modified:</div>
-          <div className="meal--data-value">{modified}</div>
-        </div>
+      {source && (
+        <>
+          <h2>Source:</h2>
+          <a data-testid="meal-source" href={source} rel="noopener noreferrer nofollow" target="_blank">
+            {source}
+          </a>
+        </>
       )}
     </div>
   );
